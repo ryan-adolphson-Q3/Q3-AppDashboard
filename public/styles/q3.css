@@ -1,3 +1,9 @@
+/* Search tools */
+#propSelect {
+	display: none;
+}
+
+/* Chart controls */
 .mp_chart_row {
 	transition: background-color 0.2s;
 }
