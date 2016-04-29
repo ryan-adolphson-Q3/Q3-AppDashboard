@@ -29,10 +29,17 @@
       var eventTable  = $('#table').MPTable({
         showPercentages: false,
       });
+      
+      var options = {
+	      items: [
+		      {label: 'Users', value: 'user'},
+		      {label: 'Info', value: 'info'}
+	      ]
+      }
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
-            propName  = propSelect.MPPropertySelect('value'),
+            propName  = propSelect.MPSelect(options),
             dateRange = dateSelect.MPDatepicker('value');
 
         if (eventName) {
