@@ -20,42 +20,43 @@
     <div id="table"></div>
     <script>
 	  
-	  MP.api.setCredentials('dca219c8c241dfc7610a95919998f1f9')
-      
-      var eventSelect = $('#eventSelect').MPEventSelect();
-      var propSelect  = $('#propSelect').MPPropertySelect();
-      var dateSelect  = $('#dateSelect').MPDatepicker();
-      var eventGraph  = $('#graph').MPChart({chartType: 'line'});
-      var eventTable  = $('#table').MPTable({
-        showPercentages: false,
-      });
-      
-      var options = {
-	      items: [
-		      {label: 'Users', value: 'user'},
-		      {label: 'Info', value: 'info'}
-	      ]
-      };
-
-      var runQuery = function() {
-        var eventName = eventSelect.MPEventSelect('value'),
-            propName  = propSelect.MPPropertySelect('value', eventName),
-            dateRange = dateSelect.MPDatepicker('value');
-
-        if (eventName) {
-          MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            eventGraph.MPChart('setData', results);
-            eventTable.MPTable('setData', results);
-          });
-        }
-      };
-      eventSelect.on('change', function(e, eventName) {
-        propSelect.MPPropertySelect('setEvent', eventName);
-        $("#by").show();
-        runQuery();
-      });
-      propSelect.on('change', runQuery);
-      dateSelect.on('change', runQuery);
+	MP.api.setCredentials('dca219c8c241dfc7610a95919998f1f9');
+		
+		
+	var options = {
+	  items: [
+	    {label: 'Info', value: 'Info'},
+	    {label: 'User', value: 'User'}
+	  ]
+	};
+	    
+	var eventSelect = $('#eventSelect').MPEventSelect();
+	var propSelect  = $('#propSelect').MPSelect(options);
+	var dateSelect  = $('#dateSelect').MPDatepicker();
+	var eventGraph  = $('#graph').MPChart({chartType: 'line'});
+	var eventTable  = $('#table').MPTable({
+	  showPercentages: false,
+	});
+	
+	var runQuery = function() {
+	  var eventName = eventSelect.MPEventSelect('value'),
+	      propName  = propSelect.MPSelect('value'),
+	      dateRange = dateSelect.MPDatepicker('value');
+	
+	  if (eventName) {
+	    MP.api.segment(eventName, propName, dateRange).done(function(results) {
+	      eventGraph.MPChart('setData', results);
+	      eventTable.MPTable('setData', results);
+	    });
+	  }
+	};
+	eventSelect.on('change', function(e, eventName) {
+	  propSelect.MPSelect();
+	  $("#by").show();
+	  runQuery();
+	});
+	propSelect.on('change', runQuery);
+	dateSelect.on('change', runQuery);
     </script>
   </body>
 </html>
