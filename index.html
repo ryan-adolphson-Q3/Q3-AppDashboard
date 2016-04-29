@@ -39,7 +39,7 @@
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
-            propName  = propSelect.MPSelect(options),
+            propName  = propSelect.MPPropertySelect('value', eventName),
             dateRange = dateSelect.MPDatepicker('value');
 
         if (eventName) {
