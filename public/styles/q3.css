@@ -1,4 +1,4 @@
 .mp_chart_row:hover {
-	background-color: #ededed;
-	transition: background-color 0.5s;
+	background-color: #ededed !important;
+	transition: background-color 0.2s;
 }
